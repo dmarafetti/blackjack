@@ -1,25 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import {stdout} from 'node:process';
 import morgan from 'morgan';
 import router from './routes/index.mjs';
 import i18n from './lang/index.mjs';
 
-const { NODE_DOCKER_PORT} = process.env;
+const { NODE_LOCAL_PORT} = process.env;
 
-
-stdout.write(' ____  _                  _       ____  _            _     _            _    \n');
-stdout.write('|  _ \\(_) ___  __ _  ___ ( )___  | __ )| | __ _  ___| | __(_) __ _  ___| | __\n');
-stdout.write('| | | | |/ _ \\/ _` |/ _ \\|// __| |  _ \\| |/ _` |/ __| |/ /| |/ _` |/ __| |/ /\n');
-stdout.write('| |_| | |  __/ (_| | (_) | \\__ \\ | |_) | | (_| | (__|   < | | (_| | (__|   <\n');
-stdout.write('|____/|_|\\___|\\__, |\\___/  |___/ |____/|_|\\__,_|\\___|_|\\_\\/ |\\__,_|\\___|_|\\_\\\n');
-stdout.write('              |___/                                     |__/\n');
-stdout.write('\n\n');
-
-
-
-
-(async function bootstrap() {
+/**
+ *
+ * @return {Promise<void>}
+ */
+export default async function bootstrap() {
 
     // Setup express.js app
 
@@ -59,7 +50,7 @@ stdout.write('\n\n');
 
     // Bootstrap web server
 
-    const port = NODE_DOCKER_PORT || 8000;
+    const port = NODE_LOCAL_PORT || 3001;
 
     app.listen(port, () => {
 
@@ -78,7 +69,7 @@ stdout.write('\n\n');
     });
 
 
-})();
+};
 
 
 
