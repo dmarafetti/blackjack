@@ -1,6 +1,6 @@
-import {Dealer} from "./player.mjs";
-import Game from "./game.mjs";
-import i18n from "../lang/index.mjs";
+const {Dealer} = require("./players");
+const Game = require('./game');
+const i18n = require('../lang');
 
 
 /**
@@ -32,7 +32,7 @@ class Blackjack {
      */
     newGame (player) {
 
-        const dealer = new Dealer(this.#t('dsadas'));
+        const dealer = new Dealer(this.#t('DEALER_NAME'));
 
         const game = new Game({dealer, player});
 
@@ -56,5 +56,4 @@ class Blackjack {
 
 }
 
-
-export default new Blackjack(); // singleton
+module.exports = new Blackjack(); // singleton

@@ -1,4 +1,4 @@
-import Card from "./card.mjs";
+const Card = require('./card');
 
 /**
  * Represents a standard 52-card French-suited deck
@@ -8,7 +8,7 @@ import Card from "./card.mjs";
  * @class
  *
  */
-export default class Deck {
+class Deck {
 
     /**
      * Array of cards
@@ -117,5 +117,5 @@ export default class Deck {
     }
 }
 
-
+module.exports = Deck;
 

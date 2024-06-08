@@ -1,7 +1,7 @@
-import express from 'express';
-import Blackjack from "../../../domain/backjack.mjs";
-import {Player} from "../../../domain/player.mjs";
-import GameRunningException from "../../../exceptions/gameRunning.js";
+const express = require('express');
+const GameRunningException = require('../../../exceptions/gameRunning');
+const {Blackjack, Players: {Player}} = require('../../../domain');
+
 
 
 const router = express.Router();
@@ -124,4 +124,4 @@ router.post('/:uuid/stand', existingGamevalidationMiddleware,  async (request, r
 });
 
 
-export default router;
+module.exports = router;

@@ -1,5 +1,5 @@
-import {stdout} from "node:process";
-import bootstrap from "./src/index.js";
+const {stdout} = require('node:process');
+const {bootstrap} = require("./src/application");
 
 stdout.write(' ____  _                  _       ____  _            _     _            _    \n');
 stdout.write('|  _ \\(_) ___  __ _  ___ ( )___  | __ )| | __ _  ___| | __(_) __ _  ___| | __\n');

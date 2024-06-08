@@ -5,7 +5,7 @@
  * @since 1.0.0
  * @extends {Error}
  */
-export default class GameRunningException extends Error {
+class GameRunningException extends Error {
 
     constructor(uuid) {
 
@@ -16,3 +16,5 @@ export default class GameRunningException extends Error {
     }
 
 }
+
+module.exports = GameRunningException;

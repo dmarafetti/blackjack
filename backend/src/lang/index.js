@@ -1,4 +1,6 @@
-import {readFile} from 'fs/promises'
+const {readFile} = require('fs/promises');
+const langFile = require('./lang.json');
+
 
 /**
  * I18n (Internationalization) module
@@ -32,18 +34,7 @@ class i18n {
      */
     init() {
 
-        readFile(new URL('./lang.json', import.meta.url), 'utf8').then(data => {
-
-            try {
-
-                Object.assign(this.#dictionary, JSON.parse(data));
-
-            } catch (ex) {
-
-                // silent catch
-            }
-
-        });
+        Object.assign(this.#dictionary, langFile);
 
     }
 
@@ -80,4 +71,4 @@ class i18n {
 
 }
 
-export default new i18n();
+module.exports = new i18n();

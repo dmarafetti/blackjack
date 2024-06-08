@@ -1,8 +1,9 @@
-import express from 'express';
-import cors from 'cors';
-import morgan from 'morgan';
-import router from './routes/index.mjs';
-import i18n from './lang/index.mjs';
+const express = require('express');
+const cors = require("cors");
+const morgan = require('morgan');
+const router = require('./routes');
+const i18n = require('./lang');
+
 
 const { NODE_LOCAL_PORT} = process.env;
 
@@ -10,7 +11,7 @@ const { NODE_LOCAL_PORT} = process.env;
  *
  * @return {Promise<void>}
  */
-export default async function bootstrap() {
+function bootstrap() {
 
     // Setup express.js app
 
@@ -68,12 +69,10 @@ export default async function bootstrap() {
 
     });
 
-
-};
-
+}
 
 
-
+module.exports = {bootstrap};
 
 
 

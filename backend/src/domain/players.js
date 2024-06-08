@@ -1,4 +1,4 @@
-import {AbstractPlayer} from "./abstractPlayer.mjs";
+const AbstractPlayer = require("./abstractPlayer.js");
 
 
 /**
@@ -8,7 +8,7 @@ import {AbstractPlayer} from "./abstractPlayer.mjs";
  * @since 1.0.0
  * @extends AbstractPlayer
  */
-export class Player extends AbstractPlayer {
+class Player extends AbstractPlayer {
 
     /**
      * Creates a player
@@ -32,7 +32,7 @@ export class Player extends AbstractPlayer {
  * @since 1.0.0
  * @extends AbstractPlayer
  */
-export class Dealer extends AbstractPlayer {
+    class Dealer extends AbstractPlayer {
 
     /**
      * Creates the Dealer
@@ -69,4 +69,4 @@ export class Dealer extends AbstractPlayer {
 
 }
 
-export default {Player, Dealer};
+module.exports = {Player, Dealer};

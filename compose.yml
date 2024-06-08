@@ -3,30 +3,29 @@ version: '3.1'
 services:
 
   frontend:
-    image: mern-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     env_file:
       - ./.env
-    depends_on: [backend, db]
+    depends_on: [backend]
     ports:
-      - "${UI_LOCAL_PORT}:${UI_DOCKER_PORT}"
+      - "${VITE_DEV_SERVER_PORT}:8001"
     networks:
-      - mern-network
+      - bj-network
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    image: mern-backend
     env_file:
       - ./.env
-    depends_on: [db]
     ports:
-      - "${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}"
+      - "${NODE_LOCAL_PORT}:3001"
     networks:
-      - mern-network
+      - bj-network
 
 networks:
 
-  mern-network:
-
+  bj-network:
     driver: bridge

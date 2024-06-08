@@ -4,7 +4,7 @@
  * @author diego
  * @since 1.0.0
  */
-export class AbstractPlayer {
+class AbstractPlayer {
 
     /**
      * @type {string}
@@ -126,3 +126,5 @@ export class AbstractPlayer {
 
 
 }
+
+module.exports = AbstractPlayer;

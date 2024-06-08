@@ -4,7 +4,7 @@
  * @author diego
  * @since 1.0.0
  */
-export default class Card {
+class Card {
 
     /**
      *
@@ -64,3 +64,4 @@ export default class Card {
 
 }
 
+module.exports = Card;

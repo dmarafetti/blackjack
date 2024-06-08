@@ -1,7 +1,8 @@
-import crypto from 'node:crypto';
-import GameRunningException from "../exceptions/gameRunning.js";
-import i18n from '../lang/index.mjs';
-import Deck from "./deck.mjs";
+const crypto = require('node:crypto');
+const GameRunningException = require('../exceptions/gameRunning');
+const i18n = require('../lang');
+const Deck = require('./deck');
+
 
 /**
  * Represents an instance of a blackjack game
@@ -9,7 +10,7 @@ import Deck from "./deck.mjs";
  * @author diego
  * @since 1.0.0
  */
-export default class Game {
+class Game {
 
     /**
      * @type {string}
@@ -361,3 +362,5 @@ export default class Game {
 
 
 }
+
+module.exports = Game;
