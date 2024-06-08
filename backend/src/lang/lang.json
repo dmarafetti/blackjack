@@ -1,0 +1,18 @@
+{
+  "en-US" : {
+    "YOU_READY" : "Are you ready?",
+    "DEALER_NAME" : "Dealer",
+    "DEALER_MOVE" : "dealer move",
+    "OVER_21" : "Dealer wins! you went over 21",
+    "PLAYER_REACH_5" : "You wins! Reach 5 cards without 21",
+    "PLAYER_BLACKJACK": "Congratulations! you win 21 Blackjack",
+    "DEALER_OVER_21" : "You win! Dealer has gone over 21",
+    "DEALER_REACH_5" : "Dealer wins! Dealer took 5 cards without going over 21",
+    "YOU_WINS" : "You wins!",
+    "DEALER_WINS" : "Dealer wins! you loose",
+    "TIE" : "You and the dealer are tied. Dealer wins",
+    "21_TIE" : "You both have Blackjack, but dealer wins on ties",
+    "DEALER_BLACKJACK" : "Dealer wins! Dealer has Blackjack",
+    "HIT_OR_STAND" : "Hit or Stand? your move"
+  }
+}

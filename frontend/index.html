@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Blackjack Game</title>
+</head>
+
+<body>
+
+    <div id="blackjack" class="blackjack">
+
+        <!-- Start screen -->
+        <div id="start-screen" class="screen screen__init ">
+
+            <h1 class="heading">Diego's Blackjack</h1>
+
+            <div class="logo">
+
+                <img src="src/assets/cards.svg" alt="cards" />
+
+            </div>
+
+            <form class="start-form">
+
+                <label for="player">
+
+                    <input type="text" id="player_name_input" name="player_name" maxlength="100" autocomplete="off" placeholder="enter your name..."/>
+
+                </label>
+
+                <button id="start" type="submit" class="start-button" disabled>Start game</button>
+
+            </form>
+
+
+
+        </div>
+        <!-- End of Start screen -->
+
+        <!-- Start Table Screen -->
+        <div id="table-screen" class="table hidden">
+
+            <!-- Dealer section -->
+            <div id="dealer" class="sector sector__dealer">
+
+                <div class="cards">
+
+                    <div id="dealer_hand" class="hand">
+
+                    </div>
+
+                </div>
+
+                <div class="info">
+
+                    <div>
+                        <h4 id="dealer_name" class="info__name">Dealer</h4>
+                        <p id="dealer_score" class="info__score">10</p>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- End of Dealer section -->
+
+            <hr class="separator"/>
+
+            <!-- Player section -->
+            <div id="player" class="sector sector__player">
+
+                <div class="cards">
+
+                    <div id="player_hand" class="hand">
+
+                    </div>
+
+                </div>
+
+                <div class="info">
+
+                    <h4 id="player_name" class="info__name">Player</h4>
+                    <p id="player_score" class="info__score">18</p>
+
+                </div>
+
+            </div>
+            <!-- End of Player section -->
+
+            <div class="message">
+                <p id="status_message"></p>
+            </div>
+
+            <div class="controls">
+                <button id="new_game" class="board-button board-button--new">Deal</button>
+                <button id="again" class="board-button board-button--new">Play again?</button>
+                <button id="exit" class="board-button board-button--stand">Exit</button>
+                <button id="hit" class="board-button board-button--hit hidden">Hit</button>
+                <button id="stand" class="board-button board-button--stand hidden">Stand</button>
+            </div>
+
+        </div>
+        <!-- End of Start Table Screen -->
+
+    </div>
+
+<script type="module" src="/src/index.js"></script>
+
+</body>
+
+</html>

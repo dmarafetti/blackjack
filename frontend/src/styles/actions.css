@@ -1,0 +1,41 @@
+
+.controls {
+
+    padding: 1.4rem 0;
+    text-align: center;
+}
+
+.board-button {
+
+    padding: 0.8rem 1.5rem;
+    min-width: 200px;
+    font-size: 1.4rem;
+    border-radius: 20px;
+}
+
+.board-button[disabled] {
+
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+.board-button.board-button--new {
+
+    background-color: #685145;
+    border: 3px solid #242424;
+    color: #e1e1e1;
+}
+
+.board-button.board-button--hit {
+
+    background-color: #1d9a4fb8;
+    border: 3px solid #0a331b;
+    color: #d6d6d6;
+}
+
+.board-button.board-button--stand {
+
+    background-color: #ff4e3bb8;
+    border: 3px solid #262626;
+    color: #d6d6d6;
+}

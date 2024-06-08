@@ -1,0 +1,16 @@
+{
+  "name": "backjack-fe",
+  "description": "Blackjack (21) Game - Frontend",
+  "author": "Diego Marafetti <dmarafetti@gmail.com> ",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port ${DEV_SERVER_PORT}",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "blackjack-backend",
+  "description": "Blackjack game",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Diego Marafetti <dmarafetti@gmail.com>",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --signal SIGHUP src/index.js"
+  },
+  "dependencies": {
+    "express": "4.18.2",
+    "cors" : "2.8.5",
+    "morgan": "1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.0"
+
+  }
+}

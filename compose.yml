@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+
+  frontend:
+    image: mern-frontend
+    env_file:
+      - ./.env
+    depends_on: [backend, db]
+    ports:
+      - "${UI_LOCAL_PORT}:${UI_DOCKER_PORT}"
+    networks:
+      - mern-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: mern-backend
+    env_file:
+      - ./.env
+    depends_on: [db]
+    ports:
+      - "${NODE_LOCAL_PORT}:${NODE_DOCKER_PORT}"
+    networks:
+      - mern-network
+
+networks:
+
+  mern-network:
+
+    driver: bridge

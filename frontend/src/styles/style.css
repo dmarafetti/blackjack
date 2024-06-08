@@ -1,0 +1,61 @@
+:root {
+
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #163c30;
+}
+
+html {
+
+    font-size: 14px;
+
+}
+
+body {
+
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+.blackjack .navbar {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 50px;
+    background-color: #000;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    padding: 0 15px;
+
+}
+
+.blackjack .navbar .brand {
+
+    font-size: 1rem;
+    font-weight: bold;
+    flex-grow: 0;
+}
+
+
+.screen {
+
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+
+}
+
