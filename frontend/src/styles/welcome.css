@@ -7,10 +7,20 @@
 
 .screen.screen__init .heading {
 
-    color: #ffcd4c;
+    color: #edd140;
     font-size: 6rem;
     text-align: center;
     margin: 0 0 2rem 0;
+    font-weight: 700;
+    text-shadow:
+        3px 4px 1px #774116,
+        1px 2px 1px #774116,
+        4px 4px 10px #774116,
+    6px 9px 4px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+
 }
 
 .screen.screen__init .logo {
@@ -35,13 +45,18 @@
 
 .start-form input[type="text"] {
 
-    font-size: 3rem;
+    font-size: 2rem;
     color: white;
-    background-color: transparent;
+    background-color: #2424247a;
+    box-shadow: 1px 1px 3px 0px #00000096;
+    border-radius: 10px;
     border: none;
-    border-bottom: 1px solid #242424;
     text-align: center;
-    padding: 1rem 2rem;
+    padding: 10px;
+}
+.start-form input[type="text"]::placeholder {
+  color: #ffffff;
+  opacity: .5; /* Firefox */
 }
 
 .start-form input[type="text"]:active,

@@ -9,11 +9,13 @@
 
 .table .separator {
 
-    width: 90%;
-    height: 1px;
+    width: 50%;
+    height: 3px;
     margin: 0 auto;
     border: none;
-    background-color: #e5e5e58c;
+    border-radius: 5px;
+    background-color: #edd140b3;
+    box-shadow: 0px 0px 4px 1px #534a14cc;
 }
 
 .table .sector {
@@ -30,7 +32,43 @@
     flex-direction: column;
     justify-content: center;
     padding-right: 3rem;
+    position: relative;
 }
+
+.table .sector .deck {
+
+    position: absolute;
+    width: 116px;
+    height: 170px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: end;
+    align-items: center;
+    top: 2rem;
+    left: 2rem;
+}
+
+.table .sector .deck > .count {
+
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.table .sector .deck > .card {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.table .sector .deck > .card.last {
+
+    left: 15px;
+    top: 15px;
+}
+
+
 
 .table .sector .info {
 
@@ -44,12 +82,35 @@
     font-size: 3rem;
     font-weight: 400;
     margin: 6rem 0 2rem 0;
+    text-transform: capitalize;
+    color: #edd140;
+
+    text-shadow:
+        2px 2px 1px #774116,
+        1px 2px 1px #774116,
+        1px 1px 10px #774116,
+    4px 4px 4px rgba(16,16,16,0.4),
+    4px 4px 4px rgba(16,16,16,0.2),
+    4px 4px 4px rgba(16,16,16,0.4);
+
+
 }
 .table .sector .info .info__score {
 
     font-size: 5rem;
     font-weight: 100;
     margin: 0;
+
+}
+.table .sector .info .info__score > span {
+
+    display: inline-block;
+    background-color: #2424247a;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 90px;
+    text-align: center;
+    box-shadow: 1px 1px 3px 0px #00000096;
 }
 
 .message {

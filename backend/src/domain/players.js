@@ -15,7 +15,7 @@ class Player extends AbstractPlayer {
      *
      * @param name
      */
-    constructor({name}) {
+    constructor(name) {
 
         super({name});
     }
@@ -32,7 +32,7 @@ class Player extends AbstractPlayer {
  * @since 1.0.0
  * @extends AbstractPlayer
  */
-    class Dealer extends AbstractPlayer {
+class Dealer extends AbstractPlayer {
 
     /**
      * Creates the Dealer

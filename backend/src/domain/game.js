@@ -1,7 +1,9 @@
 const crypto = require('node:crypto');
 const GameRunningException = require('../exceptions/gameRunning');
-const i18n = require('../lang');
+const ActionNotAllowedException = require('../exceptions/actionNotAllowedException');
 const Deck = require('./deck');
+const {ObservableGame} = require('./observable');
+const {useTranslation} = require("../lang");
 
 
 /**
@@ -10,7 +12,7 @@ const Deck = require('./deck');
  * @author diego
  * @since 1.0.0
  */
-class Game {
+class Game extends ObservableGame {
 
     /**
      * @type {string}
@@ -69,7 +71,7 @@ class Game {
     /**
      * @type {*}
      */
-    #t = i18n.useTranslation();
+    #t = useTranslation()
 
 
     /**
@@ -79,6 +81,8 @@ class Game {
      * @param player
      */
     constructor({dealer, player}) {
+
+        super();
 
         this.uuid = crypto.randomUUID();
         this.dealer = dealer;
@@ -142,43 +146,64 @@ class Game {
      */
     hit () {
 
-        if(!this.running) {
+        return new Promise((resolve, reject) => {
 
-            return;
+            if(!this.running) {
 
-        }
+                reject(new ActionNotAllowedException(this.uuid, 'hit'));
 
-        // get a new card
+            }
 
-        this.player.receiveCard(this.deck.dealACard());
+            // get a new card
 
-
-        if(this.player.getPoints() > 21) {
-
-            this.finish(this.dealer, this.#t('OVER_21'));
-
-            return;
-
-        }
-
-        if(this.player.hand.length === 5) {
-
-            this.finish(this.player, this.#t('PLAYER_REACH_5'));
-
-            return;
-
-        }
-
-        if(this.player.getPoints() === 21) {
-
-            this.finish(this.player, this.#t('PLAYER_BLACKJACK'));
-
-            this.status = this.#t('DEALER_MOVE');
-
-        }
+            this.player.receiveCard(this.deck.dealACard());
 
 
-        // hit or stand ?
+            if(this.player.getPoints() > 21) {
+
+                this.dealerMove = true;
+
+                this.dealer.faceUpCards();
+
+                this.finish(this.dealer, this.#t('OVER_21'));
+
+                resolve();
+
+                return;
+
+            }
+
+            if(this.player.hand.length === 5) {
+
+                this.dealerMove = true;
+
+                this.dealer.faceUpCards();
+
+                this.finish(this.player, this.#t('PLAYER_REACH_5'));
+
+                resolve();
+
+                return;
+            }
+
+            if(this.player.getPoints() === 21) {
+
+                this.dealerMove = true;
+
+                this.dealer.faceUpCards();
+
+                this.#doDealerMove(resolve);
+
+                return;
+
+            }
+
+
+            // hit or stand ?
+
+            resolve();
+
+        });
 
     }
 
@@ -188,11 +213,13 @@ class Game {
      */
     stand () {
 
-        // game in progress ?
-
-        if(!this.running) return;
-
         return new Promise((resolve, reject) => {
+
+            if(!this.running) {
+
+                reject(new ActionNotAllowedException(this.uuid, 'stand'));
+
+            }
 
             this.dealerMove = true;
 
@@ -247,21 +274,22 @@ class Game {
 
             const dealerScore = this.dealer.getPoints();
 
-            if(playerScore > dealerScore) {
+            if (playerScore > dealerScore) {
 
                 // win
 
-                this.finish(this.player, this.#t('YOU_WINS'));
+                this.finish(this.player, playerScore === 21 ? this.#t('PLAYER_BLACKJACK') : this.#t('YOU_WINS'));
 
                 cb();
 
                 return;
             }
 
-            if(playerScore < dealerScore) {
+            if (playerScore < dealerScore) {
 
                 // loose
-                this.finish(this.dealer, this.#t('DEALER_WINS'));
+
+                this.finish(this.dealer, dealerScore === 21 ? this.#t('DEALER_BLACKJACK') : this.#t('DEALER_WINS'));
 
                 cb();
 
@@ -270,7 +298,7 @@ class Game {
 
             // loose tie
 
-            this.finish(this.dealer, this.#t('TIE'));
+            this.finish(this.dealer, dealerScore === 21 ? this.#t('21_TIE') : this.#t('TIE'));
 
             cb();
 
@@ -279,12 +307,23 @@ class Game {
     }
 
 
-
-
     /**
      * Validate score
      */
     validate () {
+
+        this.notify(Game.BEFORE_MOVE_VALIDATION, {dealer: this.dealer, player: this.player});
+
+        this.#doMoveValidation();
+
+        this.notify(Game.AFTER_MOVE_VALIDATION, {dealer: this.dealer, player: this.player});
+    }
+
+
+    /**
+     * Effectevily validate the current move
+     */
+    #doMoveValidation () {
 
         const playerScore = this.player.getPoints();
 
@@ -294,11 +333,19 @@ class Game {
 
             if (playerScore === 21) {
 
+                this.dealerMove = true;
+
+                this.dealer.faceUpCards();
+
                 this.finish(this.dealer, this.#t('21_TIE'));
 
                 return;
 
             } else {
+
+                this.dealerMove = true;
+
+                this.dealer.faceUpCards();
 
                 this.finish(this.dealer, this.#t('DEALER_BLACKJACK'));
 
@@ -311,6 +358,10 @@ class Game {
 
             // end Game => "you have Blackjack.");
 
+            this.dealerMove = true;
+
+            this.dealer.faceUpCards();
+
             this.finish(this.player, this.#t('PLAYER_BLACKJACK'));
 
             return;
@@ -320,7 +371,6 @@ class Game {
         this.status = this.#t('HIT_OR_STAND');
 
     }
-
 
 
 
@@ -359,6 +409,11 @@ class Game {
         }
 
     }
+
+
+    static BEFORE_MOVE_VALIDATION = 'before_move_validation';
+
+    static AFTER_MOVE_VALIDATION = 'after_move_validation';
 
 
 }

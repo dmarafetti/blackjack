@@ -31,6 +31,7 @@ export default class TableView extends EventEmitter {
         // get references
         this.screenEl = document.getElementById('table-screen');
         this.statusMessageEl = document.getElementById('status_message');
+        this.deckSizeEl = document.getElementById('deck-count');
         this.dealerNameTextEl = document.getElementById('dealer_name');
         this.playerNameTextEl = document.getElementById('player_name');
         this.dealerScoreTextEl = document.getElementById('dealer_score');
@@ -70,12 +71,13 @@ export default class TableView extends EventEmitter {
     refresh (game) {
 
         this.#setDealerName(game.dealer.name);
-        this.#setDealerScore(game.dealer.score);
+        this.#setDealerScore(game.dealerMove ? game.dealer.score : '_ _');
         this.#setPlayerName(game.player.name);
         this.#setPlayerScore(game.player.score);
         this.#setPlayerHand(game.player.cards);
         this.#setDealerHand(game.dealer.cards);
         this.#setStatus(game.status);
+        this.#setDeckSize(game.deckSize);
 
         if(!game.running && game.finished) {
 
@@ -143,6 +145,11 @@ export default class TableView extends EventEmitter {
         this.statusMessageEl.innerHTML = message;
     }
 
+    #setDeckSize (size) {
+
+        this.deckSizeEl.innerHTML = size;
+    }
+
     #setDealerName (name) {
 
         this.dealerNameTextEl.innerHTML = name
@@ -184,7 +191,7 @@ export default class TableView extends EventEmitter {
 
             if(facedDown) {
 
-                img = `<img src="/src/assets/deck.svg" alt="faced down card"/>`;
+                img = `<img src="/src/assets/hand.svg" alt="faced down card"/>`;
 
             } else {
 

@@ -1,4 +1,6 @@
 const Card = require('./card');
+const OutOfCardsException = require('../exceptions/outOfCardsException');
+
 
 /**
  * Represents a standard 52-card French-suited deck
@@ -35,15 +37,21 @@ class Deck {
      */
     dealACard() {
 
+        if(this.cards.length === 0) {
+
+            throw new OutOfCardsException();
+        }
+
         return this.cards.shift();
     }
+
 
     /**
      * @param cards
      */
     addCards (cards) {
 
-        this.cards.concat(cards);
+        cards.forEach(card => this.cards.push(card));
     }
 
 

@@ -1,6 +1,7 @@
 const {Dealer} = require("./players");
 const Game = require('./game');
-const i18n = require('../lang');
+const {useTranslation} = require("../lang");
+
 
 
 /**
@@ -16,7 +17,7 @@ class Blackjack {
     /**
      * @type {*}
      */
-    #t = i18n.useTranslation();
+    #t = useTranslation();
 
 
     /**

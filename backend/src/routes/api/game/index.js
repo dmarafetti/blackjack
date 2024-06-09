@@ -33,7 +33,7 @@ const existingGamevalidationMiddleware = (request, response, next) => {
  */
 router.post('/', async (request, response) => {
 
-    const game = Blackjack.newGame(new Player({name: request.body.name}));
+    const game = Blackjack.newGame(new Player(request.body.name));
 
     response.status(201);
 
@@ -102,7 +102,7 @@ router.post('/:uuid/hit', existingGamevalidationMiddleware,  async (request, res
 
     const game = Blackjack.getGame(request.params.uuid);
 
-    game.hit();
+    await game.hit();
 
     response.json(game.getStats());
 

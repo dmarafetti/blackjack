@@ -47,7 +47,9 @@ export default class WelcomeView extends EventEmitter {
 
         this.screenEl.classList.remove('hidden');
 
-        this.inputName.value = '';
+        this.inputName.value = null;
+
+        this.#doResetButton(null);
     }
 
 
@@ -67,8 +69,16 @@ export default class WelcomeView extends EventEmitter {
 
         const value = event.target.value;
 
-        this.startButton.disabled = !value;
+        this.#doResetButton(value);
 
+    }
+
+    /**
+     * @param value
+     */
+    #doResetButton (value) {
+
+        this.startButton.disabled = !value;
     }
 
 
