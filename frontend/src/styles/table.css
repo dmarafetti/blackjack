@@ -39,7 +39,7 @@
 
     position: absolute;
     width: 116px;
-    height: 170px;
+    height: 200px;
     display: flex;
     flex-direction: column-reverse;
     justify-content: end;
@@ -53,6 +53,16 @@
     font-size: 2.5rem;
     margin: 0;
     padding: 0;
+}
+.table .sector .deck > .count > span {
+
+    display: inline-block;
+    background-color: #2424247a;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 40px;
+    text-align: center;
+    box-shadow: 1px 1px 3px 0px #00000096;
 }
 
 .table .sector .deck > .card {

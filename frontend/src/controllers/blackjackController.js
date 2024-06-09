@@ -1,4 +1,4 @@
-import {TableView, WelcomeView} from '../views';
+import {FeedbackView, TableView, WelcomeView} from '../views';
 
 /**
  * Blackjack game controller
@@ -31,6 +31,13 @@ export default class Blackjack {
 
 
     /**
+     * @type {FeedbackView}
+     */
+    #feedbackView;
+
+
+
+    /**
      * @param props
      */
     constructor(props) {
@@ -41,55 +48,123 @@ export default class Blackjack {
 
         this.#tableView = new TableView(this);
 
+        this.#feedbackView = new FeedbackView(this);
+
     }
 
 
-
+    /**
+     * Start new game
+     *
+     * @param name
+     * @return {Promise<void>}
+     */
     async start({name}) {
 
-        this.#game = await this.#gamingService.startGame({name});
+        try {
 
-        this.#welcomeView.hide();
+            this.#game = await this.#gamingService.startGame({name});
 
-        this.#tableView.show(this.#game);
+            this.#welcomeView.hide();
+
+            this.#tableView.show(this.#game);
+
+        } catch (ex) {
+
+            alert(ex.message)
+        }
+
 
     }
 
 
+    /**
+     * Begin game
+     *
+     * @return {Promise<void>}
+     */
     async begin () {
 
-        this.#game = await this.#gamingService.beginGame(this.#game);
+        try {
 
-        this.#tableView.refresh(this.#game);
+            this.#game = await this.#gamingService.beginGame(this.#game);
 
+            this.#tableView.refresh(this.#game);
+
+        } catch (ex) {
+
+            alert(ex.message)
+        }
     }
 
+
+    /**
+     * Player's hit move
+     *
+     * @return {Promise<void>}
+     */
     async hit () {
 
-        this.#game = await this.#gamingService.hit(this.#game);
+        try {
 
-        this.#tableView.refresh(this.#game);
+            this.#game = await this.#gamingService.hit(this.#game);
 
+            this.#tableView.refresh(this.#game);
+
+        } catch (ex) {
+
+            alert(ex.message)
+        }
     }
 
+    /**
+     * Player's stand move
+     *
+     * @return {Promise<void>}
+     */
     async stand () {
 
-        this.#tableView.faceUpDealerCards(this.#game);
+        try {
 
-        this.#game = await this.#gamingService.stand(this.#game);
+            this.#tableView.faceUpDealerCards(this.#game);
 
-        this.#tableView.refresh(this.#game);
+            this.#game = await this.#gamingService.stand(this.#game);
+
+            this.#tableView.refresh(this.#game);
+
+        } catch (ex) {
+
+            alert(ex.message)
+        }
 
     }
 
+
+    /**
+     * Restart game
+     *
+     * @return {Promise<void>}
+     */
     async restart () {
 
-        this.#game = await this.#gamingService.restart(this.#game);
+        try {
 
-        this.#tableView.refresh(this.#game);
+            this.#game = await this.#gamingService.restart(this.#game);
+
+            this.#tableView.refresh(this.#game);
+
+        } catch (ex) {
+
+            alert(ex.message)
+        }
     }
 
 
+    /**
+     * End game. Return to init screen
+     * 
+     * @return {Promise<void>}
+     */
     async end () {
 
         this.#game = null;

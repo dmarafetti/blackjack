@@ -3,6 +3,10 @@
 
     padding: 1.4rem 0;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
 }
 
 .board-button {
@@ -21,21 +25,38 @@
 
 .board-button.board-button--new {
 
-    background-color: #685145;
-    border: 3px solid #242424;
-    color: #e1e1e1;
+    background-color: #edd140;
+    color: #684d0a;
+    border: 3px solid #816d23;
+    box-shadow:
+            3px 2px 5px 1px #844716,
+            3px 3px 1px #864512,
+            0px 1px 0px 0px #774116,
+            2px 2px 4px 1px #774116
+
+
 }
 
 .board-button.board-button--hit {
 
-    background-color: #1d9a4fb8;
-    border: 3px solid #0a331b;
-    color: #d6d6d6;
+    background-color: #5bff3a;
+    border: 3px solid #4cde2e;
+    box-shadow:
+            3px 3px 2px 0px #266c18,
+            1px 2px 1px #266c18,
+            0px 1px 0px 0px #266c18,
+            2px 2px 4px 1px #266c18
+
 }
 
 .board-button.board-button--stand {
 
-    background-color: #ff4e3bb8;
-    border: 3px solid #262626;
-    color: #d6d6d6;
+    background-color: #ff5033;
+    border: 3px solid #bd3a22;
+    color: #530505;
+    box-shadow:
+            3px 3px 2px 0px #903526,
+            1px 2px 1px #903526,
+            0px 1px 0px 0px #903526,
+            6px 6px 6px 3px #3f10106b
 }

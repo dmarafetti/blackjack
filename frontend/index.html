@@ -13,6 +13,22 @@
 
     <div id="blackjack" class="blackjack">
 
+        <!-- Error message -->
+        <div id="feedback-panel" class="feedback-panel hidden">
+            <div class="feedback-panel__modal">
+                <div class="feedback-panel__modal__header">
+                    <h4>Information</h4>
+                </div>
+                <div class="feedback-panel__modal__body">
+                    <p id="feedback-message">This is an error!</p>
+                </div>
+                <div class="feedback-panel__modal__footer">
+                    <button type="button" id="feedback-close">close</button>
+                </div>
+            </div>
+
+        </div>
+
         <!-- Start screen -->
         <div id="start-screen" class="screen screen__init ">
 
@@ -32,7 +48,7 @@
 
                 </label>
 
-                <button id="start" type="submit" class="start-button" disabled>Start game</button>
+                <button id="start" type="submit" class="start-button" disabled>Play Now</button>
 
             </form>
 
@@ -56,7 +72,7 @@
                         <img src="./src/assets/deck.svg" alt="deck back"/>
                     </div>
 
-                    <p id="deck-count" class="count">52</p>
+                    <p class="count"><span id="deck-count">52<span></p>
 
                 </div>
 

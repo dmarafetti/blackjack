@@ -33,8 +33,16 @@ export default class AbstractService {
      */
     async doGet(path) {
 
-        const res = await fetch(`${this.#backendUrl}${path}`);
-        return res.json();
+        try {
+
+            const res = await fetch(`${this.#backendUrl}${path}`);
+
+            return res.json();
+
+        } catch (ex) {
+
+            throw new Error('Communication failed. Please try again later.');
+        }
     }
 
 
@@ -46,13 +54,21 @@ export default class AbstractService {
      */
     async doPost(path, postData) {
 
-        const res = await fetch(`${this.#backendUrl}${path}`, {
-            method: 'POST',
-            headers: {"Content-Type": "application/json",},
-            body: JSON.stringify(postData)
-        });
+        try {
 
-        return res.json();
+            const res = await fetch(`${this.#backendUrl}${path}`, {
+                method: 'POST',
+                headers: {"Content-Type": "application/json",},
+                body: JSON.stringify(postData)
+            });
+
+            return res.json();
+
+        } catch (ex) {
+
+            throw new Error('Communication failed. Please try again later.');
+        }
+
     };
 
 
