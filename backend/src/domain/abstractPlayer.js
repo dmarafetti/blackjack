@@ -1,10 +1,12 @@
+const {Observable} = require("./observable");
+
 /**
  * Represents a person playing cards
  *
  * @author diego
  * @since 1.0.0
  */
-class AbstractPlayer {
+class AbstractPlayer extends Observable {
 
     /**
      * @type {string}
@@ -24,6 +26,8 @@ class AbstractPlayer {
 
     constructor({name}) {
 
+        super();
+
         this.name = name;
     }
 
@@ -36,6 +40,8 @@ class AbstractPlayer {
     receiveCard (card) {
 
         this.hand.push(card);
+
+        this.notify(AbstractPlayer.RECEIVED_CARD, {player: this}); // join point
 
         this.#updatePoints(card.value);
 
@@ -123,6 +129,8 @@ class AbstractPlayer {
         }
 
     }
+
+    static RECEIVED_CARD = 'received_card';
 
 
 }

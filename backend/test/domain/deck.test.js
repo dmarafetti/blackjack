@@ -14,7 +14,7 @@ test('It creates a standard 52-card French-suited deck', () => {
 
 test('It shuffles the deck as expected', () => {
 
-
+    // hard to test. It may fail sometimes
 
 });
 

@@ -18,13 +18,13 @@ class Observer {
 
 
 /**
- * Event emitter implementation
+ * Observable object implementation
  *
  * @author diego
  * @since 1.0.0
  * @abstract
  */
-class ObservableGame {
+class Observable {
 
     /**
      * @type {Object}
@@ -56,15 +56,23 @@ class ObservableGame {
      */
     notify(topic, payload) {
 
-        if (this.#observers[topic] === undefined) return;
+        try {
 
-        this.#observers[topic].forEach(observer => {
+            if (this.#observers[topic] === undefined) return;
 
-            observer.notify(payload);
+            this.#observers[topic].forEach(observer => {
 
-        })
+                observer.notify(payload);
+
+            })
+
+        } catch (ex) {
+
+            console.warn(ex);
+        }
+
     }
 }
 
 
-module.exports = {ObservableGame, Observer}
+module.exports = {Observable, Observer}

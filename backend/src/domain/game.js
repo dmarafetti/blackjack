@@ -2,7 +2,7 @@ const crypto = require('node:crypto');
 const GameRunningException = require('../exceptions/gameRunning');
 const ActionNotAllowedException = require('../exceptions/actionNotAllowedException');
 const Deck = require('./deck');
-const {ObservableGame} = require('./observable');
+const {Observable} = require('./observable');
 const {useTranslation} = require("../lang");
 
 
@@ -12,7 +12,7 @@ const {useTranslation} = require("../lang");
  * @author diego
  * @since 1.0.0
  */
-class Game extends ObservableGame {
+class Game extends Observable {
 
     /**
      * @type {string}
@@ -72,6 +72,11 @@ class Game extends ObservableGame {
      * @type {*}
      */
     #t = useTranslation()
+
+    /**
+     * @type {number}
+     */
+    #delay= 2000;
 
 
     /**
@@ -146,6 +151,7 @@ class Game extends ObservableGame {
      */
     hit () {
 
+
         return new Promise((resolve, reject) => {
 
             if(!this.running) {
@@ -157,7 +163,6 @@ class Game extends ObservableGame {
             // get a new card
 
             this.player.receiveCard(this.deck.dealACard());
-
 
             if(this.player.getPoints() > 21) {
 
@@ -248,7 +253,7 @@ class Game extends ObservableGame {
 
             this.dealer.receiveCard(this.deck.dealACard());
 
-            setTimeout(this.#doDealerMove.bind(this, cb), 2000);
+            setTimeout(this.#doDealerMove.bind(this, cb), this.#delay); // simulate delay
 
 
         } else if (this.dealer.getPoints() > 21) {
@@ -312,11 +317,11 @@ class Game extends ObservableGame {
      */
     validate () {
 
-        this.notify(Game.BEFORE_MOVE_VALIDATION, {dealer: this.dealer, player: this.player});
+        this.notify(Game.BEFORE_MOVE_VALIDATION, {dealer: this.dealer, player: this.player}); // join point
 
         this.#doMoveValidation();
 
-        this.notify(Game.AFTER_MOVE_VALIDATION, {dealer: this.dealer, player: this.player});
+        this.notify(Game.AFTER_MOVE_VALIDATION, {dealer: this.dealer, player: this.player}); // join point
     }
 
 
@@ -411,10 +416,14 @@ class Game extends ObservableGame {
     }
 
 
+    setDelay (ms) {
+
+        this.#delay = ms;
+    }
+
     static BEFORE_MOVE_VALIDATION = 'before_move_validation';
 
     static AFTER_MOVE_VALIDATION = 'after_move_validation';
-
 
 }
 
