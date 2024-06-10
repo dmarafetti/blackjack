@@ -58,9 +58,12 @@ function bootstrap() {
 
     // Graceful shutdown
 
-    process.once('SIGHUP', () => {
+    process.on('SIGHUP', () => {
 
         console.log('server stopped');
+
+        // clear all games here
+
 
     });
 

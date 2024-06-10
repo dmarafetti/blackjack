@@ -1,23 +1,28 @@
+import Service from "./service";
+
 /**
- *
+ * REST Abstract methods
  *
  * @author diego
  * @since 1.0.0
+ * @abstract
  */
-export default class AbstractService {
+export default class AbstractService extends Service {
 
     /**
      * @type string
      */
-    #backendUrl = 'http://localhost:8000/api';
+    #backendUrl = '';
 
 
     /**
-     *
      * @param host
      * @param port
+     * @constructor
      */
     constructor({host, port}) {
+
+        super();
 
         if(!host || !port) throw new Error('Missing host or port');
 
@@ -27,6 +32,7 @@ export default class AbstractService {
 
 
     /**
+     * HTTP GET
      *
      * @param path
      * @returns {Promise<any>}
@@ -47,6 +53,7 @@ export default class AbstractService {
 
 
     /**
+     * HTTP POST
      *
      * @param path
      * @param postData

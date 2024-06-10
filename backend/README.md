@@ -1,40 +1,52 @@
-# My Node.js Express API
+# Blackjack 21 - Backend
 
-This is a Node.js Express project that exposes a few RESTful endpoints. Below you will find documentation for the available endpoints.
+## Setup standalone backend instance
+
+
+
+### Build docker image
+
+```sh 
+$ docker build -t blackjack-be .
+```
+
+### Configure the env file
+
+It must be specified the Node.js server port: 
+
+```
+NODE_LOCAL_PORT=3001
+```
+
+
+### Run container
+
+```sh 
+$ docker run -d -it -p 3001:3001  --name=blackjack-service  --env-file ./.env  blackjack-be
+```
+
 
 ## Installation
 
-To get started with this project, follow these steps:
+```sh 
+$ npm install
+```
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/your-repo.git
-    ```
+##  Development
+Run node on local instance.
 
-2. Navigate to the project directory:
-    ```bash
-    cd your-repo
-    ```
 
-3. Install the dependencies:
-    ```bash
-    npm install
-    ```
+```sh 
+$ npm run dev 
+```
 
-4. Start the server:
-    ```bash
-    npm start
-    ```
 
-The server will start on `http://localhost:3000`.
 
-## Endpoints
 
-### 1. GET /api/items
+## Run unit tests
 
-**Description**: Retrieves a list of items.
+Make sure the docker container is running. If not, executes run it. Afterward, run the test command with npm. 
 
-**Request**:
-```http
-GET /api/items HTTP/1.1
-Host: localhost:3000
+``` ssh
+# npm run test 
+```

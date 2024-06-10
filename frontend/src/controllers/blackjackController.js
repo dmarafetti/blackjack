@@ -10,7 +10,7 @@ export default class Blackjack {
 
     /**
      *
-     * @type {GamingService}
+     * @type {Service}
      */
     #gamingService = null;
 
@@ -162,7 +162,7 @@ export default class Blackjack {
 
     /**
      * End game. Return to init screen
-     * 
+     *
      * @return {Promise<void>}
      */
     async end () {
@@ -173,5 +173,17 @@ export default class Blackjack {
 
         this.#welcomeView.show();
     }
+
+
+    /**
+     * Set gaming service
+     *
+     * @param service {Service}
+     */
+    setGamingService (service) {
+
+        this.#gamingService = service;
+    }
+
 
 }

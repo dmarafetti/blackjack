@@ -39,11 +39,13 @@ export function bootstrap(selector, cb) {
 
 bootstrap('#blackjack', (nodeEl, params) => {
 
-    new Blackjack({
+    window.blackjack = new Blackjack({
+
         backend: new GamingService({
             host: params.get('VITE_BACKEND_HOST'),
             port: params.get('VITE_BACKEND_PORT'),
         })
+
     });
 
     // show ui

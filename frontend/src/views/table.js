@@ -191,11 +191,11 @@ export default class TableView extends EventEmitter {
 
             if(facedDown) {
 
-                img = `<img src="/src/assets/hand.svg" alt="faced down card"/>`;
+                img = `<img src="/hand.svg" alt="faced down card"/>`;
 
             } else {
 
-                img = `<img src="/src/assets/${suit}/${name}.svg" alt="${suit} ${name} card"/>`
+                img = `<img src="/${suit}/${name}.svg" alt="${suit} ${name} card"/>`
             }
 
             const cardEl = document.createElement('div');

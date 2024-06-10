@@ -55,6 +55,39 @@ class Blackjack {
         return this.games.get(uuid);
     }
 
+
+    /**
+     * Does this game exist?
+     *
+     * @param uuid
+     * @return {boolean}
+     */
+    hasGame (uuid) {
+
+        return this.games.has(uuid);
+    }
+
+    /**
+     * Deletes a game
+     *
+     * @param uuid
+     */
+    removeGame (uuid) {
+
+       return this.games.delete(uuid);
+
+    }
+
+
+    /**
+     * Clears all games
+     */
+    clearAll () {
+
+        return this.games.clear();
+    }
+
+
 }
 
 module.exports = new Blackjack(); // singleton

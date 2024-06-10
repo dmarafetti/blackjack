@@ -2,15 +2,17 @@ import AbstractService from "./abstractService.js";
 import Game from "../domain/game";
 
 /**
- *
+ * Blackjacj Gaming services. REST Implementation
  *
  * @author diego
  * @since 1.0.0
+ * @class
  */
 export default class GamingService extends AbstractService {
 
 
     /**
+     * Starts new game
      *
      * @param params
      * @returns {Promise<Game>}
@@ -25,6 +27,7 @@ export default class GamingService extends AbstractService {
 
 
     /**
+     * Start playing
      *
      * @param game
      * @returns {Promise<Game>}
@@ -38,6 +41,7 @@ export default class GamingService extends AbstractService {
 
 
     /**
+     * Player move: hit
      *
      * @param game
      * @returns {Promise<Game>}
@@ -51,6 +55,7 @@ export default class GamingService extends AbstractService {
 
 
     /**
+     * Player move: stand
      *
      * @param game
      * @returns {Promise<Game>}
@@ -64,6 +69,7 @@ export default class GamingService extends AbstractService {
 
 
     /**
+     * Restart the current game
      *
      * @param game
      * @returns {Promise<Game>}

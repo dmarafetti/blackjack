@@ -13,9 +13,12 @@ Make sure you have the following installed on your machine:
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Project Structure
-
-
-
+    .
+    ├── backend             # Backend code base
+    ├── frontend            # Fronend code base
+    ├── .env                # Environment variables
+    ├── compose.yml         # Docker compose yaml
+    └── README.md
 
 ## Setup and Run
 
@@ -24,7 +27,16 @@ Make sure you have the following installed on your machine:
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
+git clone https://github.com/dmarafetti/blackjack.git
+cd blackjack
+```
 
+### Step 2: Run Docker compose 
 
+Clone this repository to your local machine.
+
+> Don't forget to configure the `.env` file to properly setup http ports  
+
+```bash
+docker compose up --build
+```

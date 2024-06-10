@@ -12,9 +12,9 @@ const router = express.Router();
  */
 const existingGamevalidationMiddleware = (request, response, next) => {
 
-    const game = Blackjack.getGame(request.params.uuid);
+    const exists = Blackjack.hasGame(request.params.uuid);
 
-    if(game) {
+    if(exists) {
 
         next();
 
@@ -120,6 +120,28 @@ router.post('/:uuid/stand', existingGamevalidationMiddleware,  async (request, r
     await game.stand();
 
     response.json(game.getStats());
+
+});
+
+
+
+/**
+ * DELETE /api/games/:uuid/
+ */
+router.delete('/:uuid',  async (request, response) => {
+
+    const wasDeleted = Blackjack.removeGame(request.params.uuid);
+
+    if(wasDeleted) {
+
+        response.sendStatus(200);
+
+    } else {
+
+        response.sendStatus(204);
+    }
+
+    response.end();
 
 });
 
