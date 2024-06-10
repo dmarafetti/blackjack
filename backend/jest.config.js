@@ -1,5 +1,5 @@
 module.exports = {
-  roots: ['<rootDir>/test'],
+  roots: ['./test'],
   testMatch: ['**/*.test.js'],
   moduleFileExtensions: ['js', 'json', 'node']
 };

@@ -46,4 +46,7 @@ bootstrap('#blackjack', (nodeEl, params) => {
         })
     });
 
+    // show ui
+    document.getElementById('blackjack').style['display'] = 'block';
+
 });

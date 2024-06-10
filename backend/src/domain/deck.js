@@ -101,10 +101,10 @@ class Deck {
             {name: '8', value: 8},
             {name: '9', value: 9},
             {name: '10', value: 10},
-            {name: 'J', value: 10},
-            {name: 'K', value: 10},
-            {name: 'Q', value: 10},
-            {name: 'A', value: 1}
+            {name: 'j', value: 10},
+            {name: 'k', value: 10},
+            {name: 'q', value: 10},
+            {name: 'a', value: 1}
 
         ];
 
