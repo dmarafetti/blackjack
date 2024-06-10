@@ -5,8 +5,8 @@ describe('Basic game playing', () => {
     beforeAll(async () => {
 
         await page.setViewport({width: 1366, height: 768, deviceScaleFactor: 1});
-        await page.goto('http://localhost:8001');
-        //
+        const { VITE_DEV_SERVER_HOST, VITE_DEV_SERVER_PORT } = process.env;
+        await page.goto(`${VITE_DEV_SERVER_HOST}:${VITE_DEV_SERVER_PORT}`);
     });
 
 
