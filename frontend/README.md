@@ -48,12 +48,18 @@ $ npm run dev
 ```
 
 
+## Run unit tests
+
+``` ssh
+# npm run test:unit 
+```
+
 
 
 ## Run e2e tests
 
-Make sure the docker container is running. If not, executes run it. Afterward, run the test command with npm. 
+> Make sure the docker container is running. If not, executes run it. Afterward, run the test command with npm. 
 
 ``` ssh
-# npm run e2e 
+# npm run test:e2e 
 ```

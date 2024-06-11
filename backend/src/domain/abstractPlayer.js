@@ -48,9 +48,52 @@ class AbstractPlayer extends Observable {
     }
 
 
+    /**
+     * @return {boolean}
+     */
     hasBlackjack () {
 
         return this.getPoints() === 21;
+    }
+
+    /**
+     * @param score
+     *
+     * @return {boolean}
+     */
+    scoreIsGreaterThan(score) {
+
+       return this.getPoints() > score;
+    }
+
+
+    /**
+     * @param score
+     *
+     * @return {boolean}
+     */
+    scoreIsLowerThan(score) {
+
+       return this.getPoints() < score;
+    }
+
+    /**
+     * @param score
+     *
+     * @return {boolean}
+     */
+    scoreIsLowerOrEqualsThan(score) {
+
+        return this.getPoints() <= score;
+    }
+
+
+    /**
+     * @return {boolean}
+     */
+    reachFiveCards () {
+
+        return this.hand.length === 5
     }
 
 

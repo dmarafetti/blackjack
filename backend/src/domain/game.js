@@ -156,6 +156,10 @@ class Game extends Observable {
     /**
      * Hit. Player's move
      *
+     * When the five-card Charlie rule is in effect,
+     * a player who has five cards but whose hand’s total value
+     * is still less than 21 will receive an automatic win.
+     *
      */
     hit () {
 
@@ -173,7 +177,7 @@ class Game extends Observable {
 
             this.player.receiveCard(this.deck.dealACard());
 
-            if(this.player.getPoints() > 21) {
+            if(this.player.scoreIsGreaterThan(21)) {
 
                 this.dealerMove = true;
 
@@ -187,7 +191,7 @@ class Game extends Observable {
 
             }
 
-            if(this.player.hand.length === 5) {
+            if(this.player.reachFiveCards()) {
 
                 this.dealerMove = true;
 
@@ -200,7 +204,7 @@ class Game extends Observable {
                 return;
             }
 
-            if(this.player.getPoints() === 21) {
+            if(this.player.hasBlackjack()) {
 
                 this.dealerMove = true;
 
@@ -249,7 +253,9 @@ class Game extends Observable {
 
 
     /**
-     * Dealer start playing
+     * Dealer start playing. If the total is 17 or more, it must stand. If the total is 16 or under,
+     * they must take a card. The dealer must continue to take cards until
+     * the total is 17 or more, at which point the dealer must stand.
      *
      * @param cb
      */
@@ -257,17 +263,14 @@ class Game extends Observable {
 
         console.log('dealer move', this.dealer.getPoints(), cb);
 
-
-        // face card up
-
-        if (this.dealer.getHandSize() < 5 && this.dealer.getPoints() <= 16) {
+        if (!this.dealer.reachFiveCards() && this.dealer.scoreIsLowerOrEqualsThan(16)) {
 
             this.dealer.receiveCard(this.deck.dealACard());
 
             setTimeout(this.#doDealerMove.bind(this, cb), this.#delay); // simulate delay
 
 
-        } else if (this.dealer.getPoints() > 21) {
+        } else if (this.dealer.scoreIsGreaterThan(21)) {
 
             // win
 
@@ -276,7 +279,7 @@ class Game extends Observable {
             cb();
 
 
-        } else if (this.dealer.getHandSize() === 5) {
+        } else if (this.dealer.reachFiveCards()) {
 
             // loose
 
@@ -286,26 +289,22 @@ class Game extends Observable {
 
         } else {
 
-            const playerScore = this.player.getPoints();
-
-            const dealerScore = this.dealer.getPoints();
-
-            if (playerScore > dealerScore) {
+            if (this.dealer.scoreIsLowerThan(this.player.getPoints())) {
 
                 // win
 
-                this.finish(this.player, playerScore === 21 ? this.#t('PLAYER_BLACKJACK') : this.#t('YOU_WINS'));
+                this.finish(this.player, this.player.hasBlackjack() ? this.#t('PLAYER_BLACKJACK') : this.#t('YOU_WINS'));
 
                 cb();
 
                 return;
             }
 
-            if (playerScore < dealerScore) {
+            if (this.dealer.scoreIsGreaterThan(this.player.getPoints())) {
 
                 // loose
 
-                this.finish(this.dealer, dealerScore === 21 ? this.#t('DEALER_BLACKJACK') : this.#t('DEALER_WINS'));
+                this.finish(this.dealer, this.dealer.hasBlackjack() ? this.#t('DEALER_BLACKJACK') : this.#t('DEALER_WINS'));
 
                 cb();
 
@@ -314,7 +313,7 @@ class Game extends Observable {
 
             // loose tie
 
-            this.finish(this.dealer, dealerScore === 21 ? this.#t('21_TIE') : this.#t('TIE'));
+            this.finish(this.dealer, this.dealer.hasBlackjack() ? this.#t('21_TIE') : this.#t('TIE'));
 
             cb();
 
@@ -340,10 +339,6 @@ class Game extends Observable {
      * Effectevily validate the current move
      */
     #doMoveValidation () {
-
-        const playerScore = this.player.getPoints();
-
-        const dealerScore = this.dealer.getPoints();
 
         if (this.dealer.hasBlackjack()) {
 
@@ -371,8 +366,6 @@ class Game extends Observable {
         }
 
         if (this.player.hasBlackjack()) {
-
-            // end Game => "you have Blackjack.");
 
             this.dealerMove = true;
 
@@ -423,7 +416,8 @@ class Game extends Observable {
             player: this.player.getStats(),
             status: this.status,
             dealerMove: this.dealerMove,
-            updated: this.updated
+            updated: this.updated,
+            winner: this.winner
         }
 
     }
