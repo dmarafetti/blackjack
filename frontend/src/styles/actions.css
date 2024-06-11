@@ -76,3 +76,22 @@
 .board-button.board-button--stand:active {
     background-color: #ec4a2f;
 }
+
+
+@media only screen and (max-width : 900px) {
+
+    .controls {
+
+        position: fixed;
+        bottom: 0;
+        padding: 20px 0;
+        width: 100%;
+        background-color: #0000005e;
+    }
+
+    .board-button {
+
+        min-width: 100px;
+    }
+
+}

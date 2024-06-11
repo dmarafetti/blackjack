@@ -169,3 +169,87 @@
     flex-grow: 0;
 }
 
+
+
+@media only screen and (max-width : 900px) {
+
+    .table {
+
+        display: block;
+        padding-top: 130px;
+    }
+
+    .table .sector .deck {
+
+        width: 64px;
+        height: 104px;
+        top: 1rem;
+        left: 1rem;
+    }
+
+    .table .sector {
+
+        margin-bottom: 100px;
+    }
+
+    .table .sector .deck .card {
+
+        width: 50px;
+    }
+    .table .sector .deck > .count {
+
+        font-size: 1.2rem;
+    }
+    .table .sector .deck > .count > span {
+
+        padding: 5px;
+    }
+
+
+    .table .sector .cards {
+
+        width: 80%;
+        padding-right: 8px;
+    }
+
+    .table .sector .info {
+
+        width: 20%;
+    }
+
+    .table .sector .info .info__name {
+
+        font-size: 1.7rem;
+        margin: 0 0 2rem 0;
+    }
+
+    .table .sector .info .info__score {
+
+        font-size: 2rem;
+    }
+
+    .table .sector .info .info__score > span {
+
+        width: 60px;
+        padding: 8px;
+    }
+
+    .card {
+
+        width: 70px;
+    }
+
+    .message{
+
+        font-size: 2rem;
+        position: fixed;
+        bottom: 110px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .message p {
+        padding: 10px;
+    }
+
+}

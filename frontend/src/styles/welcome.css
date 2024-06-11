@@ -103,3 +103,34 @@
     opacity: .6;
     cursor: not-allowed;
 }
+
+
+
+
+
+@media only screen and (max-width : 900px) {
+
+
+    .screen.screen__init .heading {
+
+        font-size: 3rem;
+    }
+
+    .screen.screen__init .logo {
+        width: 110px;
+        margin-bottom: 4rem;
+    }
+
+
+    .start-form input[type="text"] {
+
+        font-size: 1.5rem;
+    }
+
+    .start-form .start-button {
+
+        padding: 1rem 1rem;
+        font-size: 1.5rem;
+    }
+
+}
