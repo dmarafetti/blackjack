@@ -14,109 +14,10 @@
     <div id="blackjack" class="blackjack" style="display: none">
 
         <!-- Start screen -->
-        <div id="start-screen" class="screen screen__init ">
-
-            <h1 class="heading">Diego's Blackjack</h1>
-
-            <div class="logo">
-
-                <img src="/cards.svg" alt="cards" />
-
-            </div>
-
-            <form class="start-form">
-
-                <label for="player">
-
-                    <input type="text" id="player_name_input" name="player_name" maxlength="100" autocomplete="off" placeholder="enter your name..."/>
-
-                </label>
-
-                <button id="start" type="submit" class="start-button" disabled>Play Now</button>
-
-            </form>
-
-
-
-        </div>
-        <!-- End of Start screen -->
 
         <!-- Start Table Screen -->
-        <div id="table-screen" class="table hidden">
-
             <!-- Dealer section -->
-            <div id="dealer" class="sector sector__dealer">
-
-                <div class="deck">
-
-                    <div class="card">
-                        <img src="/deck.svg" alt="deck top"/>
-                    </div>
-                    <div class="card last">
-                        <img src="/deck.svg" alt="deck back"/>
-                    </div>
-
-                    <p class="count"><span id="deck-count">52<span></p>
-
-                </div>
-
-                <div class="cards">
-
-                    <div id="dealer_hand" class="hand">
-
-                    </div>
-
-                </div>
-
-                <div class="info">
-
-                    <div>
-                        <h4 id="dealer_name" class="info__name">Dealer</h4>
-                        <p class="info__score"><span id="dealer_score">_ _</span></p>
-                    </div>
-
-                </div>
-
-
-            </div>
-            <!-- End of Dealer section -->
-
-
             <!-- Player section -->
-            <div id="player" class="sector sector__player">
-
-                <div class="cards">
-
-                    <div id="player_hand" class="hand">
-
-                    </div>
-
-                </div>
-
-                <div class="info">
-
-                    <h4 id="player_name" class="info__name">Player</h4>
-                    <p class="info__score"><span id="player_score">_ _</span></p>
-
-                </div>
-
-            </div>
-            <!-- End of Player section -->
-
-
-            <div class="message">
-                <p id="status_message"></p>
-            </div>
-
-            <div class="controls">
-                <button id="new_game" class="board-button board-button--new">Deal</button>
-                <button id="again" class="board-button board-button--new">Play again?</button>
-                <button id="exit" class="board-button board-button--stand">Exit</button>
-                <button id="hit" class="board-button board-button--hit hidden">Hit</button>
-                <button id="stand" class="board-button board-button--stand hidden">Stand</button>
-            </div>
-
-        </div>
         <!-- End of Start Table Screen -->
 
     </div>

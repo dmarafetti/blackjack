@@ -3,16 +3,25 @@ import {ActionPanelView} from "./index.js";
 
 
 /**
+ * Table view
  *
- *
- *
+ * @author diego
+ * @since 1.0.0
  */
 export default class TableView extends EventEmitter {
 
     /**
      * view's delegate
+     *
+     * @type {Blackjack}
      */
     #delegate;
+
+
+    /**
+     * @type {Element}
+     */
+    #containerEl;
 
 
     /**
@@ -21,36 +30,27 @@ export default class TableView extends EventEmitter {
     #actionPanelView;
 
 
-
-    constructor(delagate) {
+    /**
+     * @constructor
+     * @param delegate {Blackjack}
+     * @param containeEl {Element}
+     */
+    constructor(delegate, containeEl) {
 
         super();
 
-        this.#delegate = delagate;
+        this.#containerEl = containeEl;
 
-        // get references
-        this.screenEl = document.getElementById('table-screen');
-        this.statusMessageEl = document.getElementById('status_message');
-        this.deckSizeEl = document.getElementById('deck-count');
-        this.dealerNameTextEl = document.getElementById('dealer_name');
-        this.playerNameTextEl = document.getElementById('player_name');
-        this.dealerScoreTextEl = document.getElementById('dealer_score');
-        this.playerScoreTextEl = document.getElementById('player_score');
-        this.dealerHandEl = document.getElementById('dealer_hand');
-        this.playerHandEl = document.getElementById('player_hand');
-
-        // buttons panel view
-
-        this.#actionPanelView = new ActionPanelView('new_game', 'hit','stand', 'again', 'exit' );
-        this.#actionPanelView.addEventListener(ActionPanelView.ON_NEW_GAME_CLICK, this.onNewGame.bind(this));
-        this.#actionPanelView.addEventListener(ActionPanelView.ON_HIT_CLICK, this.onHit.bind(this));
-        this.#actionPanelView.addEventListener(ActionPanelView.ON_STAND_CLICK, this.onStand.bind(this));
-        this.#actionPanelView.addEventListener(ActionPanelView.ON_AGAIN_CLICK, this.onPlayAgain.bind(this));
-        this.#actionPanelView.addEventListener(ActionPanelView.ON_END_CLICK, this.onEnd.bind(this));
-        this.#actionPanelView.startNewGameMode();
+        this.#delegate = delegate;
 
     }
 
+
+    /**
+     * Show table
+     *
+     * @param game
+     */
     show (game) {
 
         this.screenEl.classList.remove('hidden');
@@ -62,12 +62,20 @@ export default class TableView extends EventEmitter {
     }
 
 
+    /**
+     * Hide table
+     */
     hide () {
 
         this.screenEl.classList.add('hidden');
     }
 
 
+    /**
+     * Redraw view with game data
+     *
+     * @param game
+     */
     refresh (game) {
 
         this.#setDealerName(game.dealer.name);
@@ -82,12 +90,13 @@ export default class TableView extends EventEmitter {
         if(!game.running && game.finished) {
 
             this.#actionPanelView.finishedGameMode();
-
         }
-
     }
 
 
+    /**
+     * On new game
+     */
     onNewGame () {
 
         this.#delegate.begin();
@@ -96,12 +105,18 @@ export default class TableView extends EventEmitter {
     }
 
 
+    /**
+     * Hit button pressed
+     */
     onHit () {
 
         this.#delegate.hit();
     }
 
 
+    /**
+     * Stand button preseed
+     */
     onStand () {
 
         this.#actionPanelView.disableStandButton();
@@ -114,6 +129,9 @@ export default class TableView extends EventEmitter {
     }
 
 
+    /**
+     * Play again pressed
+     */
     onPlayAgain () {
 
         this.#delegate.restart();
@@ -122,6 +140,9 @@ export default class TableView extends EventEmitter {
     }
 
 
+    /**
+     * Exit pressed
+     */
     onEnd () {
 
         this.#delegate.end();
@@ -129,6 +150,11 @@ export default class TableView extends EventEmitter {
     }
 
 
+    /**
+     * Display dealer's cards
+     *
+     * @param game
+     */
     faceUpDealerCards (game) {
 
         const facedDownCard = game.dealer.cards.find(card => card.facedDown);
@@ -208,6 +234,167 @@ export default class TableView extends EventEmitter {
 
         });
 
+    }
+
+
+    render() {
+
+        // Create the main container div
+        this.screenEl = document.createElement('div');
+        this.screenEl.id = 'table-screen';
+        this.screenEl.className = 'table hidden';
+
+        // Create the dealer sector
+        const dealer = document.createElement('div');
+        dealer.id = 'dealer';
+        dealer.className = 'sector sector__dealer';
+
+        // Create the deck div
+        const deck = document.createElement('div');
+        deck.className = 'deck';
+
+        // Create the first card div
+        const card1 = document.createElement('div');
+        card1.className = 'card';
+        const img1 = document.createElement('img');
+        img1.src = '/deck.svg';
+        img1.alt = 'deck top';
+        card1.appendChild(img1);
+        deck.appendChild(card1);
+
+        // Create the last card div
+        const card2 = document.createElement('div');
+        card2.className = 'card last';
+        const img2 = document.createElement('img');
+        img2.src = '/deck.svg';
+        img2.alt = 'deck back';
+        card2.appendChild(img2);
+        deck.appendChild(card2);
+
+        // Create the count paragraph
+        const count = document.createElement('p');
+        count.className = 'count';
+        this.deckSizeEl = document.createElement('span');
+        this.deckSizeEl.id = 'deck-count';
+        this.deckSizeEl.textContent = '52';
+        count.appendChild(this.deckSizeEl);
+        deck.appendChild(count);
+
+        // Append the deck to the dealer sector
+        dealer.appendChild(deck);
+
+        // Create the cards container for dealer
+        const dealerCards = document.createElement('div');
+        dealerCards.className = 'cards';
+
+        // Create the dealer hand div
+        this.dealerHandEl = document.createElement('div');
+        this.dealerHandEl.id = 'dealer_hand';
+        this.dealerHandEl.className = 'hand';
+        dealerCards.appendChild(this.dealerHandEl);
+
+        // Append the dealer cards to the dealer sector
+        dealer.appendChild(dealerCards);
+
+        // Create the dealer info div
+        const dealerInfo = document.createElement('div');
+        dealerInfo.className = 'info';
+
+        // Create the dealer info content
+        const dealerInfoContent = document.createElement('div');
+        this.dealerNameTextEl = document.createElement('h4');
+        this.dealerNameTextEl.id = 'dealer_name';
+        this.dealerNameTextEl.className = 'info__name';
+        this.dealerNameTextEl.textContent = 'Dealer';
+        dealerInfoContent.appendChild(this.dealerNameTextEl);
+
+        const dealerScore = document.createElement('p');
+        dealerScore.className = 'info__score';
+        this.dealerScoreTextEl = document.createElement('span');
+        this.dealerScoreTextEl.id = 'dealer_score';
+        this.dealerScoreTextEl.textContent = '_ _';
+        dealerScore.appendChild(this.dealerScoreTextEl);
+        dealerInfoContent.appendChild(dealerScore);
+
+        // Append the dealer info content to the dealer info
+        dealerInfo.appendChild(dealerInfoContent);
+
+        // Append the dealer info to the dealer sector
+        dealer.appendChild(dealerInfo);
+
+        // Append the dealer sector to the table screen
+        this.screenEl.appendChild(dealer);
+
+        // Create the player sector
+        const player = document.createElement('div');
+        player.id = 'player';
+        player.className = 'sector sector__player';
+
+        // Create the cards container for player
+        const playerCards = document.createElement('div');
+        playerCards.className = 'cards';
+
+        // Create the player hand div
+        this.playerHandEl = document.createElement('div');
+        this.playerHandEl.id = 'player_hand';
+        this.playerHandEl.className = 'hand';
+        playerCards.appendChild(this.playerHandEl);
+
+        // Append the player cards to the player sector
+        player.appendChild(playerCards);
+
+        // Create the player info div
+        const playerInfo = document.createElement('div');
+        playerInfo.className = 'info';
+
+        // Create the player info content
+        this.playerNameTextEl = document.createElement('h4');
+        this.playerNameTextEl.id = 'player_name';
+        this.playerNameTextEl.className = 'info__name';
+        this.playerNameTextEl.textContent = 'Player';
+        playerInfo.appendChild(this.playerNameTextEl);
+
+        const playerScore = document.createElement('p');
+        playerScore.className = 'info__score';
+        this.playerScoreTextEl = document.createElement('span');
+        this.playerScoreTextEl.id = 'player_score';
+        this.playerScoreTextEl.textContent = '_ _';
+        playerInfo.appendChild(playerScore);
+        playerScore.appendChild(this.playerScoreTextEl);
+
+        // Append the player info to the player sector
+        player.appendChild(playerInfo);
+
+        // Append the player sector to the table screen
+        this.screenEl.appendChild(player);
+
+        // Create the message div
+        const message = document.createElement('div');
+        message.className = 'message';
+        this.statusMessageEl = document.createElement('p');
+        this.statusMessageEl.id = 'status_message';
+        message.appendChild(this.statusMessageEl);
+
+        // Append the message to the table screen
+        this.screenEl.appendChild(message);
+
+        // Create the controls div
+        const controls = document.createElement('div');
+        controls.id = 'controls';
+        controls.className = 'controls';
+
+        // Append the controls to the table screen
+        this.screenEl.appendChild(controls);
+        this.#containerEl.appendChild(this.screenEl);
+
+        this.#actionPanelView = new ActionPanelView(controls);
+        this.#actionPanelView.addEventListener(ActionPanelView.ON_NEW_GAME_CLICK, this.onNewGame.bind(this));
+        this.#actionPanelView.addEventListener(ActionPanelView.ON_HIT_CLICK, this.onHit.bind(this));
+        this.#actionPanelView.addEventListener(ActionPanelView.ON_STAND_CLICK, this.onStand.bind(this));
+        this.#actionPanelView.addEventListener(ActionPanelView.ON_AGAIN_CLICK, this.onPlayAgain.bind(this));
+        this.#actionPanelView.addEventListener(ActionPanelView.ON_END_CLICK, this.onEnd.bind(this));
+        this.#actionPanelView.render();
+        this.#actionPanelView.startNewGameMode();
     }
 
 }

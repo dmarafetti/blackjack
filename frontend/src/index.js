@@ -1,7 +1,11 @@
 import './styles/style.css';
+import './styles/actions.css';
+import './styles/feedback.css';
 import './styles/table.css';
+import './styles/welcome.css';
 import Blackjack from "./controllers/blackjackController";
 import GamingService from "./services/gamingService";
+
 
 
 /**
@@ -39,16 +43,12 @@ export function bootstrap(selector, cb) {
 
 bootstrap('#blackjack', (nodeEl, params) => {
 
-    window.blackjack = new Blackjack({
+    const containerEl = document.getElementById('blackjack');
+    const host = params.get('VITE_BACKEND_HOST');
+    const port = params.get('VITE_BACKEND_PORT');
+    const backend = new GamingService({host, port});
 
-        backend: new GamingService({
-            host: params.get('VITE_BACKEND_HOST'),
-            port: params.get('VITE_BACKEND_PORT'),
-        })
-
-    });
-
-    // show ui
-    document.getElementById('blackjack').style['display'] = 'block';
+    window.blackjack = new Blackjack({backend, containerEl});
+    window.blackjack.show();
 
 });

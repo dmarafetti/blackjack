@@ -1,4 +1,4 @@
-import {TableView, WelcomeView} from '../views';
+import {MainView} from '../views';
 
 /**
  * Blackjack game controller
@@ -20,15 +20,9 @@ export default class Blackjack {
     #game = null;
 
     /**
-     * @type {WelcomeView}
+     * View {MainView}
      */
-    #welcomeView;
-
-    /**
-     * @type {TableView}
-     */
-    #tableView;
-
+    #mainView
 
 
     /**
@@ -38,11 +32,22 @@ export default class Blackjack {
 
         this.#gamingService = props.backend;
 
-        this.#welcomeView = new WelcomeView(this);
+        this.#mainView = new MainView(this, props.containerEl);
 
-        this.#tableView = new TableView(this);
+        this.#mainView.render();
 
     }
+
+
+    /**
+     * Show game on screen
+     */
+    show () {
+
+        this.#mainView.show();
+
+    }
+
 
 
     /**
@@ -57,13 +62,13 @@ export default class Blackjack {
 
             this.#game = await this.#gamingService.startGame({name});
 
-            this.#welcomeView.hide();
-
-            this.#tableView.show(this.#game);
+            this.#mainView.showTable(this.#game)
 
         } catch (ex) {
 
-            alert(ex.message)
+            alert(ex.message);
+
+            console.error(ex);
         }
 
 
@@ -81,7 +86,7 @@ export default class Blackjack {
 
             this.#game = await this.#gamingService.beginGame(this.#game);
 
-            this.#tableView.refresh(this.#game);
+            this.#mainView.refresh(this.#game);
 
         } catch (ex) {
 
@@ -101,7 +106,7 @@ export default class Blackjack {
 
             this.#game = await this.#gamingService.hit(this.#game);
 
-            this.#tableView.refresh(this.#game);
+            this.#mainView.refresh(this.#game);
 
         } catch (ex) {
 
@@ -118,11 +123,11 @@ export default class Blackjack {
 
         try {
 
-            this.#tableView.faceUpDealerCards(this.#game);
+            this.#mainView.faceUpDealerCards(this.#game);
 
             this.#game = await this.#gamingService.stand(this.#game);
 
-            this.#tableView.refresh(this.#game);
+            this.#mainView.refresh(this.#game);
 
         } catch (ex) {
 
@@ -143,7 +148,7 @@ export default class Blackjack {
 
             this.#game = await this.#gamingService.restart(this.#game);
 
-            this.#tableView.refresh(this.#game);
+            this.#mainView.refresh(this.#game);
 
         } catch (ex) {
 
@@ -161,9 +166,7 @@ export default class Blackjack {
 
         this.#game = null;
 
-        this.#tableView.hide();
-
-        this.#welcomeView.show();
+        this.#mainView.showInitScreen();
     }
 
 
