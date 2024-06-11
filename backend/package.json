@@ -6,7 +6,7 @@
   "author": "Diego Marafetti <dmarafetti@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nodemon --signal SIGHUP index.js",
+    "dev": "nodemon index.js",
     "test": "jest",
     "lint": "eslint ."
   },

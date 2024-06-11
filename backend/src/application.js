@@ -16,9 +16,11 @@ function bootstrap() {
 
     const app = express();
 
+
     // Logging
 
     app.use(morgan('dev'));
+
 
     // json content type handling
 
@@ -29,13 +31,10 @@ function bootstrap() {
 
     app.use(cors({
         origin: '*',
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        methods: ['GET', 'POST', 'DELETE'],
+        allowedHeaders: ['Content-Type'],
         optionsSuccessStatus: 204
     }));
-
-
-    // Enabled i18n support
 
 
     // register api routes
@@ -55,17 +54,6 @@ function bootstrap() {
     });
 
 
-
-    // Graceful shutdown
-
-    process.on('SIGHUP', () => {
-
-        console.log('server stopped');
-
-        // clear all games here
-
-
-    });
 
 }
 

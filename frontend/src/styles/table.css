@@ -94,6 +94,9 @@
     margin: 6rem 0 2rem 0;
     text-transform: capitalize;
     color: #edd140;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
     text-shadow:
         2px 2px 1px #774116,
@@ -132,7 +135,11 @@
 .message p {
 
     margin: 0;
-    padding: 1rem 0;
+    display: inline-block;
+    background-color: #2424247a;
+    padding: 1rem 1.4rem;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 0px #00000096;
 }
 
 .card {

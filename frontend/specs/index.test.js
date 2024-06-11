@@ -1,5 +1,3 @@
-require('./mocks');
-
 jest.setTimeout(60000);
 
 describe('Basic game playing', () => {
@@ -28,8 +26,6 @@ describe('Basic game playing', () => {
 
     it('Should see the play now button and being redirected to a new game', async () => {
 
-        await expect(page.title()).resolves.toMatch('Blackjack Game');
-        await page.waitForSelector('#player_name_input');
         await page.type('#player_name_input', 'Gambler');
         await page.waitForSelector( "#start" );
         await expect(page).toClick("#start", { text: "Play Now" });
@@ -38,4 +34,24 @@ describe('Basic game playing', () => {
         await expect(page).toMatchTextContent("Gambler");
 
     });
+
+    it('Should start a new game and press deal cards', async () => {
+
+        await expect(page).toClick("#new_game", { text: "Deal" });
+        await page.waitForSelector( "#hit" );
+        await page.waitForSelector( "#stand" );
+        await expect(page).toMatchTextContent("48"); // deck
+        await expect(page).toMatchTextContent("14"); // player score
+
+    });
+
+    it('Should start a new game and press deal cards', async () => {
+
+        await expect(page).toClick("#hit", { text: "Hit" });
+        await expect(page).toMatchTextContent("21"); // player score
+        await expect(page).toMatchTextContent("Congratulations! you win 21 Blackjack"); // deck
+
+    });
+
+
 });

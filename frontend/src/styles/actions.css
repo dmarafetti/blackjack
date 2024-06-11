@@ -1,12 +1,12 @@
 
 .controls {
 
-    padding: 1.4rem 0;
+    padding: 1.4rem 0 2rem 0;
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 12px;
+    gap: 20px;
 }
 
 .board-button {
@@ -33,9 +33,14 @@
             3px 3px 1px #864512,
             0px 1px 0px 0px #774116,
             2px 2px 4px 1px #774116
-
-
 }
+
+.board-button.board-button--new:hover,
+.board-button.board-button--new:active {
+    background-color: #d3bb38;
+}
+
+
 
 .board-button.board-button--hit {
 
@@ -46,8 +51,14 @@
             1px 2px 1px #266c18,
             0px 1px 0px 0px #266c18,
             2px 2px 4px 1px #266c18
-
 }
+
+.board-button.board-button--hit:hover,
+.board-button.board-button--hit:active {
+    background-color: #54ec36;
+}
+
+
 
 .board-button.board-button--stand {
 
@@ -59,4 +70,9 @@
             1px 2px 1px #903526,
             0px 1px 0px 0px #903526,
             6px 6px 6px 3px #3f10106b
+}
+
+.board-button.board-button--stand:hover,
+.board-button.board-button--stand:active {
+    background-color: #ec4a2f;
 }

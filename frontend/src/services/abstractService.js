@@ -39,16 +39,17 @@ export default class AbstractService extends Service {
      */
     async doGet(path) {
 
-        try {
+        const res = await fetch(`${this.#backendUrl}${path}`);
 
-            const res = await fetch(`${this.#backendUrl}${path}`);
+        if (!res.ok) {
 
-            return res.json();
+            if(res.status === 404) {
 
-        } catch (ex) {
-
-            throw new Error('Communication failed. Please try again later.');
+                throw new Error(`Communication failed. Cause: ${res.statusText}`);
+            }
         }
+
+        return res.json();
     }
 
 
@@ -61,20 +62,22 @@ export default class AbstractService extends Service {
      */
     async doPost(path, postData) {
 
-        try {
+        const res = await fetch(`${this.#backendUrl}${path}`, {
+            method: 'POST',
+            headers: {"Content-Type": "application/json",},
+            body: JSON.stringify(postData)
+        });
 
-            const res = await fetch(`${this.#backendUrl}${path}`, {
-                method: 'POST',
-                headers: {"Content-Type": "application/json",},
-                body: JSON.stringify(postData)
-            });
 
-            return res.json();
+        if (!res.ok) {
 
-        } catch (ex) {
+            if(res.status === 404) {
 
-            throw new Error('Communication failed. Please try again later.');
+                throw new Error(`Communication failed. Cause: ${res.statusText}`);
+            }
         }
+
+        return res.json();
 
     };
 

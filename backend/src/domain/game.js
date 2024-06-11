@@ -69,6 +69,12 @@ class Game extends Observable {
 
 
     /**
+     * @type {string}
+     */
+    updated = '';
+
+
+    /**
      * @type {*}
      */
     #t = useTranslation()
@@ -94,6 +100,7 @@ class Game extends Observable {
         this.player = player;
         this.deck = Deck.createDeck();
         this.status = this.#t('YOU_READY');
+        this.updateTime();
 
     }
 
@@ -116,6 +123,7 @@ class Game extends Observable {
 
         // validate first
         this.validate();
+        this.updateTime();
 
     }
 
@@ -130,7 +138,6 @@ class Game extends Observable {
 
             throw new GameRunningException(this.uuid);
         }
-
         this.deck.addCards(this.player.returnCards());
         this.deck.addCards(this.dealer.returnCards());
 
@@ -138,10 +145,11 @@ class Game extends Observable {
         this.player.resetScore();
 
         this.winner = null;
-        this.status = '';
         this.running = false;
         this.finished = false;
         this.dealerMove = false;
+        this.status = this.#t('YOU_READY');
+        this.updateTime();
     }
 
 
@@ -151,6 +159,7 @@ class Game extends Observable {
      */
     hit () {
 
+        this.updateTime();
 
         return new Promise((resolve, reject) => {
 
@@ -217,6 +226,8 @@ class Game extends Observable {
      * Player stands
      */
     stand () {
+
+        this.updateTime();
 
         return new Promise((resolve, reject) => {
 
@@ -334,9 +345,9 @@ class Game extends Observable {
 
         const dealerScore = this.dealer.getPoints();
 
-        if (dealerScore === 21) {
+        if (this.dealer.hasBlackjack()) {
 
-            if (playerScore === 21) {
+            if (this.player.hasBlackjack()) {
 
                 this.dealerMove = true;
 
@@ -359,7 +370,7 @@ class Game extends Observable {
 
         }
 
-        if (playerScore === 21) {
+        if (this.player.hasBlackjack()) {
 
             // end Game => "you have Blackjack.");
 
@@ -391,6 +402,7 @@ class Game extends Observable {
         this.status = reason;
         this.running = false;
         this.finished = true;
+        this.updateTime();
     }
 
 
@@ -410,16 +422,31 @@ class Game extends Observable {
             dealer: this.dealer.getStats(),
             player: this.player.getStats(),
             status: this.status,
-            dealerMove: this.dealerMove
+            dealerMove: this.dealerMove,
+            updated: this.updated
         }
 
     }
 
-
+    /**
+     * Simulate a delay on dealer moves
+     *
+     * @param ms {number}
+     */
     setDelay (ms) {
 
         this.#delay = ms;
     }
+
+
+    /**
+     * Update last action time
+     */
+    updateTime () {
+
+        this.updated = (new Date()).toISOString();
+    }
+
 
     static BEFORE_MOVE_VALIDATION = 'before_move_validation';
 

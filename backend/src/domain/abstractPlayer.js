@@ -47,6 +47,13 @@ class AbstractPlayer extends Observable {
 
     }
 
+
+    hasBlackjack () {
+
+        return this.getPoints() === 21;
+    }
+
+
     /**
      * Get player's point. Calculate its total taking aces into account
      *

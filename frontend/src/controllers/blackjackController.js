@@ -1,4 +1,4 @@
-import {FeedbackView, TableView, WelcomeView} from '../views';
+import {TableView, WelcomeView} from '../views';
 
 /**
  * Blackjack game controller
@@ -10,7 +10,7 @@ export default class Blackjack {
 
     /**
      *
-     * @type {Service}
+     * @type {Service | GamingService}
      */
     #gamingService = null;
 
@@ -30,12 +30,6 @@ export default class Blackjack {
     #tableView;
 
 
-    /**
-     * @type {FeedbackView}
-     */
-    #feedbackView;
-
-
 
     /**
      * @param props
@@ -47,8 +41,6 @@ export default class Blackjack {
         this.#welcomeView = new WelcomeView(this);
 
         this.#tableView = new TableView(this);
-
-        this.#feedbackView = new FeedbackView(this);
 
     }
 
