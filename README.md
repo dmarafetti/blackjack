@@ -1,13 +1,25 @@
 # ♣ Blackjack Javascript v1.0.0
 
 
+This project is a game developed as a demo. Currently, the game uses in-memory storage for persistence, 
+meaning all data is lost when the application is closed. Future versions will implement a database 
+for persistent data storage and also user's session. 
 
-This project consists of two parts:
+It consists of two parts:
 
 1. The [Frontend](https://github.com/dmarafetti/blackjack/tree/main/frontend). A vanilla js application running with Vite.
 2. The [Backend](https://github.com/dmarafetti/blackjack/tree/main/backend) A Node.js application.
 
 Both the frontend and backend have Dockerfiles and are orchestrated using Docker Compose.
+
+
+## Roadmap
+- [x] Implement basic game mechanics
+- [ ] Implement user's session
+- [ ] Integrate database for persistent storage
+- [ ] Enhance UI/UX
+- [ ] Add more features such us betting
+
 
 ## Prerequisites
 
